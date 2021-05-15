@@ -1,7 +1,8 @@
 # Azure Infrastructure Operations Project: Deploying a scalable IaaS web server in Azure
 
 
-![](images/Microsoft_Azure-Logo.wine.png)
+<img src="images/Microsoft_Azure-Logo.wine.png" width="100" >      <img src="images/Terraform-logo.png" width="100" >    <img src="images/Packer-logo.png" width="100" >
+
 
 ### Introduction
 For this project, you will write a Packer template and a Terraform template to deploy a customizable, scalable web server in Azure.
