@@ -16,7 +16,7 @@
 		"image_sku": "18.04-LTS SKU",
 
 		"managed_image_resource_group_name": "udacity-training-rg",
-		"managed_image_name": "myPackerImage",
+		"managed_image_name": "myPackerServerImage",
 
 		"location": "West Europe",
 		"vm_size": "Standard_A1_v2"
