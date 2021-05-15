@@ -1,26 +1,25 @@
 {   
   "properties": {
-    "mode": "Indexed",
-    "parameters": {
-      "tagName": {
-        "type": "String",
-        "metadata": {
-          "description": "Name of the tag to be enforce",
-          "displayName": "Tag name"
+      "mode": "Indexed",
+      "parameters": {
+        "tagName": {
+          "type": "String",
+          "metadata": {
+            "description": "Name of the tag to be enforce"
+          }
+        }
+      },
+      "policyRule": {
+        "if": {
+          "allof": [{
+              "field": "[concat('tags[', parameters('tagName'), ']')]",
+              "exists": "false"
+            }
+          ]
+        },
+        "then": {
+          "effect": "deny"
         }
       }
-    },
-    "policyRule": {
-      "if": {
-        "allof": [{
-            "field": "[concat('tags[', parameters('tagName'), ']')]",
-            "exists": "false"
-          }
-        ]
-      },
-      "then": {
-        "effect": "deny"
-      }
-    }
   }
 }
