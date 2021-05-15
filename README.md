@@ -1,7 +1,7 @@
 # Azure Infrastructure Operations Project: Deploying a scalable IaaS web server in Azure
 
 
-<img src="images/Microsoft_Azure-Logo.wine.png" width="100" >      <img src="images/Terraform-logo.png" width="100" >    <img src="images/Packer-logo.png" width="100" >
+<img src="images/Microsoft_Azure-Logo.wine.png" width="220" >      <img src="images/Terraform-logo.png" width="220" >    <img src="images/packer_empty.png" width="220" >
 
 
 ### Introduction
