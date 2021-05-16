@@ -22,7 +22,6 @@ resource "azurerm_subnet" "internal" {
 }
 
 
-
 resource "azurerm_network_security_group" "main" {
   name                = "${var.prefix}-SecurityGroup"
   location            = azurerm_resource_group.main.location
@@ -41,12 +40,6 @@ resource "azurerm_network_security_group" "main" {
   }
 
 }
-
-
-
-
-
-
 
 
 resource "azurerm_network_interface" "main" {
