@@ -21,6 +21,34 @@ resource "azurerm_subnet" "internal" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+
+
+resource "azurerm_network_security_group" "main" {
+  name                = "${var.prefix}-SecurityGroup"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+
+  security_rule {
+    name                       = "test123"
+    priority                   = 100
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "*"
+    source_address_prefix      = "*"
+    destination_address_prefix = "*"
+  }
+
+}
+
+
+
+
+
+
+
+
 resource "azurerm_network_interface" "main" {
   name                = "${var.prefix}-nic"
   resource_group_name = azurerm_resource_group.main.name
@@ -67,7 +95,7 @@ resource  "azurerm_public_ip" "public_ip" {
 }
 
 
-resource "azurerm_lb" "load_balancer" {
+resource "azurerm_lb" "main" {
   name                = "${var.prefix}_Load_Balancer"
   location            = "West Europe"
   resource_group_name = azurerm_resource_group.main.name
