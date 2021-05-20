@@ -14,8 +14,8 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = azurerm_resource_group.main.name
 }
 
-resource "azurerm_subnet" "internal" {
-  name                 = "internal"
+resource "azurerm_subnet" "main" {
+  name                 = "${var.prefix}-subnet"
   resource_group_name  = azurerm_resource_group.main.name
   virtual_network_name = azurerm_virtual_network.main.name
   address_prefixes     = ["10.0.2.0/24"]
@@ -28,14 +28,15 @@ resource "azurerm_network_security_group" "main" {
   resource_group_name = azurerm_resource_group.main.name
 
   security_rule {
-    name                       = "test123"
-    priority                   = 100
-    direction                  = "Inbound"
-    access                     = "Allow"
-    protocol                   = "Tcp"
-    source_port_range          = "*"
-    destination_port_range     = "*"
-    source_address_prefix      = "*"
+    name                      = "${var.prefix}-DenyAllTraffic-ntk-sec-rule"
+    priority                  = 1000
+    direction                 = "Inbound"
+    access                    = "Deny"
+    protocol                  = "*"
+    source_port_range         = "*"
+    destination_port_range    = "*"
+    source_address_prefix     = "*"
+    description = "Deny All traffic"
     destination_address_prefix = "*"
   }
 
@@ -97,4 +98,10 @@ resource "azurerm_lb" "main" {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.main.id
   }
+}
+
+
+resource "azurerm_subnet_network_security_group_association" "main" {
+  subnet_id                 = azurerm_subnet.main.id
+  network_security_group_id = azurerm_network_security_group.main.id
 }
