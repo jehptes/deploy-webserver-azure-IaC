@@ -80,6 +80,13 @@ resource "azurerm_linux_virtual_machine" "main" {
   }
 }
 
+resource "azurerm_availability_set" "main" {
+  name                = "${var.prefix}-availability-set"
+  location            = azurerm_resource_group.main.location
+  resource_group_name = azurerm_resource_group.main.name
+
+}
+
 
 resource  "azurerm_public_ip" "public_ip" {
   name                 = "${var.prefix}_public_ip"
