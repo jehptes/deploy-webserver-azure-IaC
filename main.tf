@@ -65,12 +65,12 @@ resource "azurerm_linux_virtual_machine" "main" {
   admin_password                  = "${var.password}"
   disable_password_authentication = false
   network_interface_ids = [
-    azurerm_network_interface.main.*.id[count.index],                         # creates three different ids for different VMs
+    azurerm_network_interface.main.*.id[count.index],                         # creates different ids for different VMs based on count
   ]
   
 
   os_disk {
-    storage_account_type = "Standard_LRS"
+    storage_account_type = "Standard_LRS"      
     caching              = "ReadWrite"
   }
 
@@ -81,6 +81,18 @@ resource "azurerm_linux_virtual_machine" "main" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
+}
+
+
+resource "azurerm_managed_disk" "main" {
+  count                = 3
+  name                 = "${var.prefix}-managed-disk-00-${count.index}"
+  location             = "West Europe"
+  resource_group_name  = azurerm_resource_group.main.name
+  storage_account_type = "Standard_LRS"
+  create_option        = "Empty"
+  disk_size_gb         = "1"
+
 }
 
 
