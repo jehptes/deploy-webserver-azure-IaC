@@ -56,7 +56,8 @@ resource "azurerm_network_interface" "main" {
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
-  name                            = "${var.prefix}-vm"
+  count                           = 3                                         # Number of VMs to be created       
+  name                            = "${var.prefix}-VM-00-${count.index}"      # Tracks  count for different vm creation
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
   size                            = "Standard_D2s_v3"
@@ -64,8 +65,15 @@ resource "azurerm_linux_virtual_machine" "main" {
   admin_password                  = "${var.password}"
   disable_password_authentication = false
   network_interface_ids = [
-    azurerm_network_interface.main.id,
+    azurerm_network_interface.main.*.id[count.index],                         # creates three different ids for different VMs
   ]
+  
+
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching              = "ReadWrite"
+  }
+
 
   source_image_reference {
     publisher = "Canonical"
@@ -73,12 +81,8 @@ resource "azurerm_linux_virtual_machine" "main" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
-
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching              = "ReadWrite"
-  }
 }
+
 
 resource "azurerm_availability_set" "main" {
   name                = "${var.prefix}-availability-set"
