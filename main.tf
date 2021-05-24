@@ -44,19 +44,20 @@ resource "azurerm_network_security_group" "main" {
 
 
 resource "azurerm_network_interface" "main" {
-  name                = "${var.prefix}-nic"
+  count               = var.num_netw_interface
+  name                = "${var.prefix}-NIC-${count.index}"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.internal.id
+    subnet_id                     = azurerm_subnet.main.id
     private_ip_address_allocation = "Dynamic"
   }
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
-  count                           = 3                                         # Number of VMs to be created       
+  count                           = var.num_vms                                      # Number of VMs to be created       
   name                            = "${var.prefix}-VM-00-${count.index}"      # Tracks  count for different vm creation
   resource_group_name             = azurerm_resource_group.main.name
   location                        = azurerm_resource_group.main.location
@@ -85,9 +86,9 @@ resource "azurerm_linux_virtual_machine" "main" {
 
 
 resource "azurerm_managed_disk" "main" {
-  count                = 3
+  count                = var.num_managed_disks
   name                 = "${var.prefix}-managed-disk-00-${count.index}"
-  location             = "West Europe"
+  location             = azurerm_resource_group.main.location
   resource_group_name  = azurerm_resource_group.main.name
   storage_account_type = "Standard_LRS"
   create_option        = "Empty"
@@ -104,7 +105,7 @@ resource "azurerm_availability_set" "main" {
 }
 
 
-resource  "azurerm_public_ip" "public_ip" {
+resource  "azurerm_public_ip" "main" {
   name                 = "${var.prefix}_public_ip"
   location             = azurerm_resource_group.main.location
   resource_group_name  = azurerm_resource_group.main.name
