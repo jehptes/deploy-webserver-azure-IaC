@@ -10,7 +10,7 @@ variable "location" {
 
 variable "password" {
     description = "The Azure  resource password"
-    default = " " 
+    default = "" 
     sensitive = true
 }
 
