@@ -17,9 +17,13 @@
 		"image_offer": "UbuntuServer",
 		"image_sku": "18.04-LTS",
 
+		"azure_tags": {
+			"Tag": "webserver"
+		},
+
 		"managed_image_resource_group_name": "udacity-project-rg",
 		"managed_image_name": "myPackerServerImage",
-		"build_resource_group_name": "udacity-project-rg",
+		"location": "West Europe",
 		"vm_size": "Standard_A1_v2"
 	}],
 	"provisioners": [{
