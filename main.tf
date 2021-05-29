@@ -3,7 +3,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "${var.prefix}-resources"
+  name     = "${var.prefix}-project-rg"
   location = var.location
 }
 
@@ -44,13 +44,12 @@ resource "azurerm_network_security_group" "main" {
 
 
 resource "azurerm_network_interface" "main" {
-  count               = var.num_netw_interface
-  name                = "${var.prefix}-NIC-${count.index}"
+  name                = "${var.prefix}-NIC"
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
 
   ip_configuration {
-    name                          = "internal"
+    name                          = "${var.prefix}_ip_configuration"
     subnet_id                     = azurerm_subnet.main.id
     private_ip_address_allocation = "Dynamic"
   }
@@ -78,7 +77,6 @@ resource "azurerm_lb" "main" {
 
 
 resource "azurerm_lb_backend_address_pool" "main" {
-  resource_group_name = azurerm_resource_group.main.name
   loadbalancer_id     = azurerm_lb.main.id
   name                = "${var.prefix}_BackEnd_AddressPool"
 }

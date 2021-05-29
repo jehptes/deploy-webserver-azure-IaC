@@ -10,29 +10,23 @@ variable "location" {
 
 variable "password" {
     description = "The Azure  resource password"
-    default = "" 
+    default = "foubs01-acc" 
     sensitive = true
 }
 
 variable "username" {
     description = "The Azure username"
-    default     = " " 
+    default     = "foubsUser" 
     sensitive   = true
 }
 
 variable "num_vms" {
     type        =  number
-    description = "The number of VMs"
+    description = "The number of Vitual machines"
 }
 
 
 variable "num_managed_disks" {
     type        = number
     description = "The number of Managed disks"
-}
-
-
-variable "num_netw_interface" {
-    type        = number
-    description = "The number of network interface"
 }
