@@ -10,18 +10,29 @@ This project is developed to deploy a customizable, scalable web server in Azure
 ### Getting Started
 Before you start using the project code:
 * Make sure you have a git account.
-* Clone the project git repository. 
+* Clone the project to your local git repository. 
+* Open the project files in your local Integrated development environment(IDE).
 
 ### Dependencies
 1. Create an [Azure Account](https://portal.azure.com) on the Microsoft website. 
 2. Install the [Azure command line interface](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest) on your laptop or work station.
 3. Install [Packer](https://www.packer.io/downloads) on your laptop or work station.
 4. Install [Terraform](https://www.terraform.io/downloads.html) on your laptop or work station.
-5. Install an IDE to use for code manipulation. If you already have one installed, you don't need to 
+5. Install an Integrated development environment(IDE) to use for code manipulation. If you already have one installed, you don't need to 
    install any new IDE. 
 
 ### Instructions
 cmd = command
+
+**vars.tf  Description**
+
+  This file contains variables for terraform such as  prefix, location, password, username, num_vms and num_managed_disks 
+
+  You can specify default values for each variable or leave it empty to only do that when running the cmd line. 
+
+  Within this  file for the password and username, you can sepcify the default username , also specify the password or  azure secrets if you have.
+
+
 
 1. On cmd line run : **az login**
 
@@ -63,7 +74,7 @@ cmd = command
   **resource_group_name_tf**---> name of the resource group in the terraform main.tf file.
 
   **subscription_id**----------> subscription id from azure portal.
-  
+
   **resource_group_name**------> azure resource group already existing in azure portal.
 
 

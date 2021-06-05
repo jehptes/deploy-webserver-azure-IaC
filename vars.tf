@@ -10,13 +10,13 @@ variable "location" {
 
 variable "password" {
     description = "The Azure  resource password"
-    default = "foubs01-acc" 
+    default = "" 
     sensitive = true
 }
 
 variable "username" {
     description = "The Azure username"
-    default     = "foubsUser" 
+    default     = "" 
     sensitive   = true
 }
 
