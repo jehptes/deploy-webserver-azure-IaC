@@ -61,7 +61,9 @@ cmd = command
   **terraform import azurerm_resource_group.resource_group_name_tf /subscriptions/subscription_id/resourceGroups/resource_group_name_portal**
   
   **resource_group_name_tf**---> name of the resource group in the terraform main.tf file.
+
   **subscription_id**----------> subscription id from azure portal.
+  
   **resource_group_name**------> azure resource group already existing in azure portal.
 
 
