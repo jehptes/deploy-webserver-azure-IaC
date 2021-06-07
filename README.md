@@ -24,15 +24,42 @@ Before you start using the project code:
 ### Instructions
 cmd = command
 
-**vars.tf  Description**
+**How to customize the vars.tf**
 
-  This file contains variables for terraform such as  prefix, location, password, username, num_vms and num_managed_disks 
+The vars.tf contains variables for terraform including  prefix, location, password, username, num_vms and num_managed_disks. You can customize each variable. 
 
-  You can specify default values for each variable or leave it empty to only do that when running the cmd line. 
+**NOTE:** 
+
+* For each of these variables, they can either have integer or string default values, in case you want to specify a default value, within the code definition of each variable, add a default value:  
+
+For string defaults values ------------------> "default" = "name_here"
+
+For integer defaults values -----------------> "default" = 2
+
+In case you do not specify a default value within the vars.tf for each variable, you will be be prompted to do that when running terraform plan or apply. 
+
+
+**prefix:** This is the prefix name that will be added to azure resource names specified in the main.tf file. To make sure the prefix is added to  the name of a resource in the main.tf file during creation, add the prefix variable to the name parameter of the resource, for example: 
+name  = "${var.variable_name}-network"    ---------->   name   = "${var.prefix}-network"
+
+
+**location**: This is the region in which you want your azure resources to be created. 
+
+**password**: This is the azure resource password. Here you just need to specify your password on the default parameter. 
+
+**username**: This is the azure resource username. Here you just need to specidy your username on the default parameter. 
+
+**num_vms** : This is the variable that provides the number of Vitual machines to created by terraform. You can change the default value to meet your requirements by following the steps above for variables with int defaults.
+
+**num_managed_disks**: This is the variable that provides the number of managed disks to be created by terraform. You can change the default value to meet your requirements by following the steps above for variables with int defaults.
+
+
+You can specify default values for each variable or leave it empty to only do that when running the cmd line. 
 
   Within this  file for the password and username, you can sepcify the default username , also specify the password or  azure secrets if you have.
 
 
+**Instructions to run packer and Terraform templates**
 
 1. On cmd line run : **az login**
 
