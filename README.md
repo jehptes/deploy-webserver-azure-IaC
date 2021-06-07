@@ -54,11 +54,6 @@ name  = "${var.variable_name}-network"    ---------->   name   = "${var.prefix}-
 **num_managed_disks**: This is the variable that provides the number of managed disks to be created by terraform. You can change the default value to meet your requirements by following the steps above for variables with int defaults.
 
 
-You can specify default values for each variable or leave it empty to only do that when running the cmd line. 
-
-  Within this  file for the password and username, you can sepcify the default username , also specify the password or  azure secrets if you have.
-
-
 **Instructions to run packer and Terraform templates**
 
 1. On cmd line run : **az login**
